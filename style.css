@@ -11,9 +11,8 @@
 }
 
 :root {
-    --maincolour: #b74b4b;
+    --maincolour: #4682b4;
     /* --maincolour: #b74b4b; */
-    animation: colorCycle 20s linear infinite;
   }
   
 
@@ -32,6 +31,7 @@ body{
 }
 
 header{
+    display: flex;
     margin-top: 20px;
     position: fixed;
     top: 0;
@@ -48,6 +48,7 @@ header{
 }
 
 .logo{
+    position: fixed;
     font-size: 3rem;
     color: var(--maincolour);
     font-weight: 800;
@@ -59,7 +60,12 @@ header{
     transform: scale(1.1);
     /* color: #f5f5f5; */
 }
+nav{
+    margin-left: auto; /* Pushes nav to the right */
+    display: flex;
+    gap: 20px;
 
+}
 nav a{
     font-size: 1.8rem;
     color: white;
@@ -91,6 +97,9 @@ nav a:hover,nav a.active{
         
 
 
+    }
+    .magnifier{
+        display: none;
     }
     nav.active{
         display: block;
@@ -330,19 +339,5 @@ span{
     transform: scale(1.5);
   }
 
-  @keyframes colorCycle {
-    0%, 100% {
-        --maincolour: #b74b4b;
-    }
-    25% {
-        --maincolour: #4682b4;
-    }
-    50% {
-        --maincolour: #32cd32;
-    }
-    75% {
-        --maincolour: #ff1493;
-    }
-}
 
   
