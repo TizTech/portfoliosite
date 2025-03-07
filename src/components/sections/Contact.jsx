@@ -1,27 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import emailjs from "emailjs-com";
 
 export const Contact = () => {
-
-  const VITE_SERVICE_ID = "service_0sk7bj8"
-  const VITE_TEMPLATE_ID = "template_zi1h93q"
-  const VITE_PUBLIC_KEY = "K2lZd4JYr18jOfhZD"
+  const VITE_SERVICE_ID = "service_0sk7bj8";
+  const VITE_TEMPLATE_ID = "template_zi1h93q";
+  const VITE_PUBLIC_KEY = "K2lZd4JYr18jOfhZD";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
+  useEffect(() => {
+    emailjs.init(VITE_PUBLIC_KEY);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     emailjs
       .sendForm(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
+        VITE_SERVICE_ID,
+        VITE_TEMPLATE_ID,
         e.target,
-        import.meta.env.VITE_PUBLIC_KEY
+        VITE_PUBLIC_KEY
       )
       .then((result) => {
         alert("Message Sent!");
@@ -38,7 +41,6 @@ export const Contact = () => {
       <RevealOnScroll>
         <div className="px-4 w-full min-w-[300px] md:w-[500px] sm:w-2/3 p-6">
           <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
-            {" "}
             Get In Touch
           </h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
