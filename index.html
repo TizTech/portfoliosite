@@ -14,7 +14,76 @@
     <title>Tizzle Studios</title>
   </head>
   <body>
+    <div class="magnifier"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
+
+  <style>
+    *{cursor: none;}
+    body{cursor: none;}
+    .magnifier {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  border-radius: 50%;
+  border: 2px solid rgba(66, 47, 212, 0.755);
+  background: rgba(21, 155, 167, 0.184);
+  pointer-events: none;
+  backdrop-filter: blur(3px);
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease-out; /* Smooth transition */
+
+
+}
+
+@media (max-width: 768px) {
+  body {
+    cursor: default; /* Remove custom cursor on tablet and smaller screens */
+  }
+  
+  /* Optional: Adjust content for smaller screens */
+  .magnifier{
+    display: none;
+  }
+}
+  </style>
+
+  <script>
+    const magnifier = document.querySelector(".magnifier");
+
+// Variables for smooth dragging
+let mouseX = 0, mouseY = 0;
+let currentX = 0, currentY = 0;
+const speed = 0.1; // Adjust speed for smoother drag
+
+document.addEventListener("mousemove", (e) => {
+  // Set mouse coordinates
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function smoothMove() {
+  // Calculate the new position gradually
+  currentX += (mouseX - currentX) * speed;
+  currentY += (mouseY - currentY) * speed;
+
+  // Apply the smooth position to the magnifier
+  magnifier.style.left = `${currentX}px`;
+  magnifier.style.top = `${currentY}px`;
+
+  // Update background zoom effect
+  magnifier.style.backgroundPosition = `${-currentX / 3}px ${-currentY / 3}px`;
+
+  // Continue the animation
+  requestAnimationFrame(smoothMove);
+}
+
+// Start the smooth movement
+smoothMove();
+
+
+
+  </script>
 </html>
